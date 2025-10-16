@@ -4,173 +4,131 @@ class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
   @override
-  State<Homepage> createState() => HomepageState();
+  State<Homepage> createState() => _HomepageState();
 }
 
-class HomepageState extends State<Homepage> {
+class _HomepageState extends State<Homepage> {
+  // Reutilizable: TextField personalizado
+  Widget customTextField(String label, String hint, IconData icon) {
+    return SizedBox(
+      width: 250,
+      child: TextField(
+        enableInteractiveSelection: false,
+        decoration: InputDecoration(
+          hintText: hint,
+          labelText: label,
+          suffixIcon: Icon(icon, color: const Color(0xFF4B0082)),
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          hintStyle: const TextStyle(color: Color(0xFF4B0082)),
+          labelStyle: const TextStyle(color: Color(0xFF4B0082)),
+        ),
+      ),
+    );
+  }
+
+  // Reutilizable: Botón personalizado
+  Widget customButton(String text, Color bgColor, Color fgColor, VoidCallback onPressed) {
+    return SizedBox(
+      width: 180,
+      child: TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: bgColor,
+          foregroundColor: fgColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: const TextStyle(fontFamily: "Montserrat", fontSize: 16),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 1, 54, 52),
+      backgroundColor: const Color(0xFF4B0082), // Fondo morado elegante
       body: ListView(
-        children: <Widget>[
+        children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 50), 
+              const SizedBox(height: 50),
+              // Avatar con borde elegante
               CircleAvatar(
-                radius: 100.0,
-                backgroundColor: Colors.red,
-                backgroundImage: const AssetImage("images/angel.jpg"),
+                radius: 100,
+                backgroundColor: Colors.white,
+                child: CircleAvatar(
+                  radius: 95,
+                  backgroundImage: const AssetImage("images/angel.jpg"),
+                ),
               ),
-              const SizedBox(height: 20), 
+              const SizedBox(height: 20),
+              // Títulos elegantes
               const Text(
                 "Login",
                 style: TextStyle(
-                  fontFamily: "NerkoOne", //Siempre poner la fuente en pubspec.yaml 
-                  fontSize: 50.0
+                  fontFamily: "NerkoOne",
+                  fontSize: 50,
+                  color: Colors.amberAccent,
                 ),
               ),
               const Text(
                 "Ejemplo1",
                 style: TextStyle(
-                  fontFamily: "OleoScriptSwashCaps", //Siempre poner la fuente en pubspec.yaml 
-                  fontSize: 40.0,
+                  fontFamily: "OleoScriptSwashCaps",
+                  fontSize: 40,
+                  color: Colors.white70,
                 ),
               ),
+              const SizedBox(height: 30),
 
-              // crear un campo de usuario
-              Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
+              // Campos de entrada
+              customTextField("user-name", "USER-NAME", Icons.verified_user),
+              const SizedBox(height: 15),
+              customTextField("password", "PASSWORD-PASSWORD", Icons.password),
+              const SizedBox(height: 15),
+              customTextField("EMAIL", "EMAIL-EMAIL", Icons.email),
+              const SizedBox(height: 30),
 
-    // USERNAME
-    Center(
-      child: SizedBox(
-        width: 250,
-        child: TextField(
-          enableInteractiveSelection: false,
-          decoration: const InputDecoration(
-            hintText: "USER-NAME",
-            labelText: "user-name",
-            suffixIcon: Icon(Icons.verified_user),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            ),
-          ),
-        ),
-      ),
-    ),
+              // Botones con colores elegantes
+              customButton("Ingresar", Colors.purpleAccent.shade100, Colors.white, () {}),
+              const SizedBox(height: 15),
+              customButton("Registrarse", Colors.purple.shade400, Colors.white, () {}),
+              const SizedBox(height: 15),
+              customButton("Recuperar Contraseña", Colors.deepPurple.shade300, Colors.white, () {}),
+              const SizedBox(height: 15),
+              customButton("Modo Invitado", Colors.cyan.shade300, Colors.white, () {}),
+              const SizedBox(height: 30),
 
-    SizedBox(height: 15), // espacio entre campos
-
-    // PASSWORD
-    Center(
-      child: SizedBox(
-        width: 250,
-        child: TextField(
-          enableInteractiveSelection: false,
-          decoration: const InputDecoration(
-            hintText: "PASSWORD-PASSWORD",
-            labelText: "password",
-            suffixIcon: Icon(Icons.password),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            ),
-          ),
-        ),
-      ),
-    ),
-
-    SizedBox(height: 15),
-
-    // EMAIL
-    Center(
-      child: SizedBox(
-        width: 250,
-        child: TextField(
-          enableInteractiveSelection: false,
-          decoration: const InputDecoration(
-            hintText: "EMAIL-EMAIL",
-            labelText: "EMAIL",
-            suffixIcon: Icon(Icons.email),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            ),
-          ),
-        ),
-      ),
-    ),
-
-    SizedBox(height: 20),
-
-    // BOTON INGRESAR
-    Center(
-      child: SizedBox(
-        width: 180, // ancho del botón
-        child: TextButton(
-          style: TextButton.styleFrom(
-            backgroundColor: Colors.green,
-            foregroundColor: const Color.fromARGB(255, 75, 193, 75),
-          ),
-          onPressed: () {},
-          child: const Text('Ingresar'),
-        ),
-      ),
-    ),
-
-    SizedBox(height: 20),
-
-    // BOTON REGISTRARSE
-    Center(
-      child: SizedBox(
-        width: 180,
-        child: TextButton(
-          style: TextButton.styleFrom(
-            backgroundColor: Colors.green,
-            foregroundColor: const Color.fromARGB(255, 75, 193, 75),
-          ),
-          onPressed: () {},
-          child: const Text('Registrarse'),
-        ),
-      ),
-    ),
-SizedBox(height: 20),
-
-    // BOTON RECUPERA CONTRASEÑA
-    Center(
-      child: SizedBox(
-        width: 180,
-        child: TextButton(
-          style: TextButton.styleFrom(
-            backgroundColor: Colors.green,
-            foregroundColor: const Color.fromARGB(255, 22, 2, 69),
-          ),
-          onPressed: () {},
-          child: const Text('Recuperar Contraseña'),
-        ),
-      ),
-    ),
-    SizedBox(height: 20),
-
-    // BOTON MODO INVITADO
-    Center(
-      child: SizedBox(
-        width: 180,
-        child: TextButton(
-          style: TextButton.styleFrom(
-            backgroundColor: Colors.green,
-            foregroundColor: const Color.fromARGB(255, 67, 19, 224),
-          ),
-          onPressed: () {},
-          child: const Text('Modo Invitado'),
-        ),
-      ),
-    ),
-
-  ],
-)
-
+              // Ejemplo de uso de otras fuentes
+              const Text(
+                "BebasNeue Font",
+                style: TextStyle(fontFamily: "BebasNeue", fontSize: 24, color: Colors.white70),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "Pacifico Font",
+                style: TextStyle(fontFamily: "Pacifico", fontSize: 24, color: Colors.white70),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "Roboto Font",
+                style: TextStyle(fontFamily: "Roboto", fontSize: 20, color: Colors.white70),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "Montserrat Font",
+                style: TextStyle(fontFamily: "Montserrat", fontSize: 20, color: Colors.white70),
+              ),
+              const SizedBox(height: 50),
             ],
           ),
         ],

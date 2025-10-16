@@ -1,7 +1,9 @@
-import 'package:ejemploa/src/app.dart';
 import 'package:flutter/material.dart';
-// 
-void main() => runApp(const MyApp());
+import 'package:ejemploa/src/app.dart'; // ✅ ruta correcta al archivo app.dart
+
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -9,9 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, //borrar el logotipo
+      debugShowCheckedModeBanner: false,
       title: "App Login",
-      home: Homepage(),
-        );
+      home: const Homepage(), // 👈 clase que está dentro de app.dart
+    );
   }
 }

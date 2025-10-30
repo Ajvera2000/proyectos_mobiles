@@ -106,7 +106,7 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
               const Text(
-                "Ejemplo1",
+                "",
                 style: TextStyle(
                   fontFamily: "OleoScriptSwashCaps",
                   fontSize: 40,
